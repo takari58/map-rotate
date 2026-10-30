@@ -1,5 +1,5 @@
 console.log("leaflet=",L);
-console.log("Bearing =",LMap.prototype.setBearing);
+console.log("Bearing =",L.Map.prototype.setBearing);
 
 const map = L.map("map",{
         maxZoom:19,
