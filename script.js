@@ -1,12 +1,18 @@
+console.log("leaflet=",L);
+console.log("Bearing =",LMap.prototype.setBearing);
+
 const map = L.map("map",{
         maxZoom:19,
-        minZoom:5,
+        minZoom:5
+        /*
         rotate:true,
         touchRotate:true,
         bearing:0
+        */
 });
+console.log(map);
 map.touchRotate.enable();
-map.on("zoomed rotate",() => {
+map.on("zoomend rotate",() => {
         map.invalidateSize();
 });
 //初期位置を現在地に
