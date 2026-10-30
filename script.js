@@ -1,7 +1,12 @@
 const map = L.map("map",{
         maxZoom:19,
         minZoom:5
-})
+
+        rotate:true,
+        touchRotate:true,
+        bearing:0
+});
+map.touchRotate.enable();
 //初期位置を現在地に
 navigator.geolocation.getCurrentPosition(
     function(position) {
