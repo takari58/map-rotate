@@ -13,6 +13,9 @@ map.touchRotate.enable();
 map.on("zoomend rotate",() => {
         map.invalidateSize();
 });
+
+console.log("touchRotate =",mao.touchRotate);
+
 //初期位置を現在地に
 navigator.geolocation.getCurrentPosition(
     function(position) {
