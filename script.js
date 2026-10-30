@@ -7,6 +7,9 @@ const map = L.map("map",{
         bearing:0
 });
 map.touchRotate.enable();
+map.on("zoomed rotate",() => {
+        map.invalidateSize();
+});
 //初期位置を現在地に
 navigator.geolocation.getCurrentPosition(
     function(position) {
