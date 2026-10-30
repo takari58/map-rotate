@@ -231,6 +231,8 @@ let watchId = null;
 let selectedGoal = null;
 let currentPosition = null;
 
+let inCompassMode = false;
+
 const markers = [];
 
 // カスタムアイコンを作成
@@ -359,6 +361,9 @@ function startNavigation(goal) {
                 myLng,
                 accuracy
             );
+            if(isCompassMode){
+                    map.panTo([mylat,mylng],{animate:false});
+            }
             if (selectedGoal) {
                 showRoute(
                     myLat,
@@ -404,7 +409,9 @@ function updateCurrentMarker(lat,lng,accuracy) {
     const currentIcon = L.divIcon({
         className: "current-marker",
         html: `
-            <div class="current-location">
+            <div id="arrow"
+                    class="currenr-arrow">
+                ⬆️
             </div>
         `,
         iconSize: [24, 24],
@@ -642,7 +649,6 @@ document
     .addEventListener(
         "click",
         function() {
-
             // 現在地がすでに取得できている
             if (currentPosition) {
                 map.setView(
@@ -654,7 +660,6 @@ document
                 );
                 return;
             }
-
             // GPSが使えない
             if (!navigator.geolocation) {
                 alert(
@@ -662,7 +667,6 @@ document
                 );
                 return;
             }
-
             // 現在地取得
             navigator.geolocation.getCurrentPosition(
                 function(position) {
@@ -698,3 +702,75 @@ document
             );
         }
     );
+//コンパス開始処理
+document
+.getElementById("compassButton")
+.addEventListener(
+    "click",
+    toggleCompass
+);
+function toggleCompass(){
+    isCompassMode =
+        !isCompassMode;
+    if(!isCompassMode){
+        map.setBearing(0);
+        window.removeEventListener(
+            "deviceorientation",
+            handleOrientation,
+            true
+        );
+        return;
+    }
+    if(
+        typeof DeviceOrientationEvent
+        !== "undefined"
+        &&
+        typeof DeviceOrientationEvent
+        .requestPermission
+        === "function"
+    ){
+        DeviceOrientationEvent
+        .requestPermission()
+        .then(result=>{
+            if(result==="granted"){
+                startCompass();
+            }
+        });
+    }else{
+        startCompass();
+    }
+}
+
+//コンパス処理
+function startCompass(){
+    window.addEventListener(
+        "deviceorientation",
+        handleOrientation,
+        true
+    );
+
+}
+
+//地図回転
+function handleOrientation(event){
+    let heading = null;
+    if(
+        event.webkitCompassHeading
+        !== undefined
+    ){
+        heading =
+            event.webkitCompassHeading;
+    }
+    else if(
+        event.alpha !== null
+    ){
+        heading =
+            360 - event.alpha;
+    }
+    if(heading === null){
+        return;
+    }
+    map.setBearing(
+        -heading
+    );
+}
