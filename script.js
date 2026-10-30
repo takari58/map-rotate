@@ -3,12 +3,10 @@ console.log("Bearing =",L.Map.prototype.setBearing);
 
 const map = L.map("map",{
         maxZoom:19,
-        minZoom:5
-        /*
+        minZoom:5,
         rotate:true,
         touchRotate:true,
         bearing:0
-        */
 });
 console.log(map);
 map.touchRotate.enable();
