@@ -171,6 +171,10 @@ header h1 {
     background: transparent;
     border: none;
 }
+.current-arrow{
+    font-size: 32px;
+    text-align: center;
+}
 .current-location {
     width: 22px;
     height: 22px;
