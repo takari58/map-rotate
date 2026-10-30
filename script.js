@@ -773,4 +773,7 @@ function handleOrientation(event){
     map.setBearing(
         -heading
     );
+    const arrow =
+            document.getElementById("arrow");
+    if(arrow){arrow.style.transform="rotate(0deg)";}
 }
