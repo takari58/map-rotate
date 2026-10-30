@@ -137,12 +137,11 @@ header h1 {
     padding-top: 8px;
 }
 #map {
-    width: 100%;
-    height:
-        calc(
-            100vh - 190px
-        );
-    position: relative;
+    width: 300vw;
+    height: 300vh;
+    position: absolute;
+    top: 120px;
+    left -25vw;
     z-index: 1;
 }
 .custom-marker {
