@@ -1,7 +1,6 @@
 const map = L.map("map",{
         maxZoom:19,
-        minZoom:5
-
+        minZoom:5,
         rotate:true,
         touchRotate:true,
         bearing:0
