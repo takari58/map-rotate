@@ -19,12 +19,9 @@ console.log("touchRotate =",map.touchRotate);
 //初期位置を現在地に
 navigator.geolocation.getCurrentPosition(
     function(position) {
-
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-
         map.setView([lat, lng], 18);
-
         updateCurrentMarker(
             lat,
             lng,
@@ -226,7 +223,6 @@ const goals = [
         icon: "🍴"
     }
 ];
-
 const categoryColors = {
     "観光": "#f39c12",
     "グルメ": "#e74c3c",
@@ -423,8 +419,8 @@ function updateCurrentMarker(lat,lng,accuracy) {
                 ⬆️
             </div>
         `,
-        iconSize: [24, 24],
-        iconAnchor: [12, 12]
+        iconSize: [40,40],
+        iconAnchor: [16,16]
     });
 
     // 初回
@@ -460,7 +456,6 @@ async function showRoute(
     try {
         const response =
             await fetch(url);
-
         const data =
             await response.json();
 
@@ -556,34 +551,12 @@ async function showRoute(
                     ${goal.category}
                 </div>
                 <div class="route-information">
-                    <div>
-                        🚶
-                        <strong>
-                            約 ${walkMinutes} 分
-                        </strong>
-                    </div>
-                    <div>
-                        🚴
-                        <strong>
-                            約 ${bicycleMinutes} 分
-                        </strong>
-                    </div>
-                    <div>
-                        🚙
-                        <strong>
-                            約 ${carMinutes} 分
-                        </strong>
-                    </div>
-                    <div>
-                        📏
-                        <strong>
-                            ${distanceKm} km
-                        </strong>
-                    </div>
+                    <div>🚶<strong> 約 ${walkMinutes} 分</strong></div>
+                    <div>🚴<strong> 約 ${bicycleMinutes} 分</strong></div>
+                    <div>🚙<strong>約 ${carMinutes} 分</strong></div>
+                    <div>📏<strong>${distanceKm} km</strong></div>
                 </div>
-                <div class="route-message">
-                    🧭 青い線に沿って進んでください
-                </div>
+                <div class="route-message">🧭 青い線に沿って進んでください</div>
             `;
     }
 
@@ -711,6 +684,7 @@ document
             );
         }
     );
+
 //コンパス開始処理
 document
 .getElementById("compassButton")
@@ -719,9 +693,9 @@ document
     toggleCompass
 );
 function toggleCompass(){
-    isCompassMode =
-        !isCompassMode;
-    if(!isCompassMode){
+    inCompassMode =
+        !inCompassMode;
+    if(!inCompassMode){
         map.setBearing(0);
         window.removeEventListener(
             "deviceorientation",
