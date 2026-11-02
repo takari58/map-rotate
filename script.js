@@ -14,7 +14,7 @@ map.on("zoomend rotate",() => {
         map.invalidateSize();
 });
 
-console.log("touchRotate =",mao.touchRotate);
+console.log("touchRotate =",map.touchRotate);
 
 //初期位置を現在地に
 navigator.geolocation.getCurrentPosition(
@@ -370,8 +370,8 @@ function startNavigation(goal) {
                 myLng,
                 accuracy
             );
-            if(isCompassMode){
-                    map.panTo([mylat,mylng],{animate:false});
+            if(inCompassMode){
+                    map.panTo([myLat,myLng],{animate:false});
             }
             if (selectedGoal) {
                 showRoute(
