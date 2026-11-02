@@ -415,7 +415,7 @@ function updateCurrentMarker(lat,lng,accuracy) {
         className: "current-marker",
         html: `
             <div id="arrow"
-                    class="currenr-arrow">
+                    class="current-arrow">
                 ⬆️
             </div>
         `,
