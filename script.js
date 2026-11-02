@@ -419,7 +419,7 @@ function updateCurrentMarker(lat,lng,accuracy) {
                 ⬆️
             </div>
         `,
-        iconSize: [40,40],
+        iconSize: [30,30],
         iconAnchor: [16,16]
     });
 
